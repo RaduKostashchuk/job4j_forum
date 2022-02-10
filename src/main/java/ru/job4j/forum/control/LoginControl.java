@@ -22,7 +22,6 @@ public class LoginControl {
         String errorMessage = null;
         String logoutMessage = null;
         String regMessage = null;
-        System.out.println(model.getAttribute("reg"));
         if (error != null) {
             errorMessage = "Login failed";
         }

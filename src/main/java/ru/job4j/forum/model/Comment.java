@@ -1,10 +1,16 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
+@Entity
 public class Comment {
+    @Id
+    @GeneratedValue
     private int id;
     private String content;
     private String author;

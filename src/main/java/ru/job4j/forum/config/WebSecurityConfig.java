@@ -1,38 +1,37 @@
 package ru.job4j.forum.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.sql.DataSource;
+
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    DataSource ds;
+
     @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-        List<UserDetails> users = new ArrayList<>();
-        Set<GrantedAuthority> adminRoles = new HashSet<>();
-        adminRoles.add(() -> "ROLE_ADMIN");
-        User admin = new User("admin", "{noop}12345", adminRoles);
-        users.add(admin);
-        return new InMemoryUserDetailsManager(users);
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(inMemoryUserDetailsManager());
+        auth.jdbcAuthentication()
+                .dataSource(ds)
+                .usersByUsernameQuery("select name, password, enabled from users where name = ?")
+                .authoritiesByUsernameQuery("select x.name, y.name from users x, authority y"
+                        + " where x.name = ? and x.authority_id = y.id");
     }
 
     @Override
@@ -57,4 +56,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();
     }
+
 }

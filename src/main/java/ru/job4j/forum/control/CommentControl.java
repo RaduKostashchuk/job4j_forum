@@ -30,6 +30,7 @@ public class CommentControl {
         Post post = posts.getById(Integer.parseInt(id));
         String author = SecurityContextHolder.getContext().getAuthentication().getName();
         post.addComment(Comment.of(content, author));
+        posts.add(post);
         return "redirect:/post?id=" + id;
     }
 }

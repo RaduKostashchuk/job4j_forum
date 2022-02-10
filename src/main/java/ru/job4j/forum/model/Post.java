@@ -1,21 +1,23 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Set;
 
+@Entity
 public class Post {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String author;
-    private String description;
     private LocalDateTime created;
-    private final List<Comment> comments = new CopyOnWriteArrayList<>();
-    AtomicInteger commentId = new AtomicInteger(1);
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private final Set<Comment> comments = new HashSet<>();
 
     public static Post of(String name, String author) {
         Post post = new Post();
@@ -49,14 +51,6 @@ public class Post {
         this.author = author;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public LocalDateTime getCreated() {
         return created;
     }
@@ -65,14 +59,12 @@ public class Post {
         this.created = created;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public Comment addComment(Comment comment) {
-        comment.setId(commentId.incrementAndGet());
+    public void addComment(Comment comment) {
         comments.add(comment);
-        return comment;
     }
 
     @Override
@@ -97,7 +89,6 @@ public class Post {
         return "Post{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", description='" + description + '\''
                 + ", created=" + created
                 + '}';
     }
