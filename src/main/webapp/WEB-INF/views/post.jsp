@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Содержание темы</title>
+    <title>Post content</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -25,47 +25,53 @@
         <div class="row">
             <div class="col-4">
                 <p class="h6 m-1">
-                    Просмотр темы:
+                    Post name:
                     <span class="fw-normal"><c:out value="${post.name}"/></span>
                 </p>
                 <p class="h6 m-1">
-                    Создана:
+                    Created:
                     <fmt:parseDate value="${post.created}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
                     <span class="fw-normal">
                         <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${parsedDateTime}" />
                     </span>
                 </p>
                 <p class="h6 m-1">
-                    Автор:
+                    Author:
                     <span class="fw-normal"><c:out value="${post.author}"/></span>
                 </p>
             </div>
             <div class="col-2 offset-6">
-                <a class="btn btn-warning m-3" href="<%=request.getContextPath()%>/deletepost?id=${post.id}">
-                    Удалить тему
+                <a class="btn btn-primary m-3" href="<%=request.getContextPath()%>/post/edit?postId=${post.id}">
+                    Edit
                 </a>
             </div>
         </div>
         <table class="table table-bordered table-striped table-hover">
             <thead>
             <tr>
-                <th scope="col">Содержание поста</th>
-                <th scope="col">Создан</th>
-                <th scope="col">Автор</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Created</th>
+                <th scope="col">Author</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${post.comments}" var="comment">
                 <tr>
                     <td>
+                        <p class="m-1">
                         <c:out value="${comment.content}"/>
+                        </p>
                     </td>
                     <td>
+                        <p class="m-1">
                         <fmt:parseDate value="${comment.created}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
                         <fmt:formatDate pattern="dd.MM.yyyy HH:mm:ss" value="${parsedDateTime}" />
+                        </p>
                     </td>
                     <td>
+                        <p class="m-1">
                         <c:out value="${comment.author}"/>
+                        </p>
                     </td>
                 </tr>
             </c:forEach>
@@ -74,8 +80,8 @@
     </div>
     <div class="row">
         <div class="col-2 offset-10">
-            <a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/addcomment?id=${post.id}">
-                Оставить сообщение
+            <a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/comment/add?postId=${post.id}">
+                Leave comment
             </a>
         </div>
     </div>

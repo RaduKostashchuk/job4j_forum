@@ -1,10 +1,14 @@
 # job4j_forum
 
-It is a forum application.
+It is a simple forum application.
 
-There is guest access for anonymous users.
+There is read only guest access fro anonymous users.
 
-Registered users can add/delete topics, leave messages.
+Registered user can create posts, edit/delete his own posts, leave new comments
+
+and edit/delete his own comments left earlier.
+
+Admin user can create posts, edit/delete all posts, edit his own comments and delete all comments. 
 
 Main page.
 
@@ -17,6 +21,18 @@ Some post page.
 Add post page.
 
 ![ScreenShot](images/addpost.png)
+
+Edit post page.
+
+![ScreenShot](images/editpost.png)
+
+Successful post modification.
+
+![ScreenShot](images/postsuccess.png)
+
+Failed post modification.
+
+![ScreenShot](images/postfailure.png)
 
 Add comment page.
 

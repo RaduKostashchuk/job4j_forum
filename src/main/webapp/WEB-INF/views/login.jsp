@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Страница входа</title>
+    <title>Login</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -25,7 +25,7 @@
         <div class="col-4 offset-4">
             <div class="card">
                 <div class="card-header">
-                    <p class="h5">Вход</p>
+                    <p class="h5">Login</p>
                 </div>
                 <div class="card-body">
                     <form action="<%=request.getContextPath()%>/login" method="post" onsubmit="return validate()">
@@ -45,15 +45,15 @@
                             </div>
                         </c:if>
                         <div class="form-group m-1">
-                            <label>Имя пользователя</label>
+                            <label>Name</label>
                             <input type="text" class="form-control" id="usernameInput" name="username">
                         </div>
                         <div class="form-group m-1">
-                            <label>Пароль</label>
-                            <input type="text" class="form-control" id="passwordInput" name="password">
+                            <label>Password</label>
+                            <input type="password" class="form-control" id="passwordInput" name="password">
                         </div>
-                        <button type="submit" class="btn btn-primary m-1">Войти</button>
-                        <a href="<%=request.getContextPath()%>/reg" class="card-link">Регистрация</a>
+                        <button type="submit" class="btn btn-primary m-1">Login</button>
+                        <a href="<%=request.getContextPath()%>/reg" class="card-link">Registration</a>
                     </form>
                 </div>
             </div>

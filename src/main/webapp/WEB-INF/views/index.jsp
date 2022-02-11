@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Форум</title>
+    <title>Forum</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -22,19 +22,31 @@
 <div class="container">
     <jsp:include page="navbar.jsp"/>
     <div class="m-1">
+        <c:if test="${not empty successMessage}">
+            <div class="alert alert-info" role="alert">
+                <c:out value="${successMessage}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-warning" role="alert">
+                <c:out value="${errorMessage}"/>
+            </div>
+        </c:if>
+    </div>
+    <div class="m-1">
         <table class="table table-bordered table-striped table-hover">
             <thead>
             <tr>
-                <th scope="col">Название</th>
-                <th scope="col">Создана</th>
-                <th scope="col">Автор</th>
+                <th scope="col">Name</th>
+                <th scope="col">Created</th>
+                <th scope="col">Author</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${posts}" var="post">
                 <tr>
                     <td>
-                        <a class="nav-link" href="<%=request.getContextPath()%>/post?id=${post.id}">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/post?postId=${post.id}">
                             <c:out value="${post.name}"/>
                         </a>
                     </td>
@@ -45,7 +57,9 @@
                         </p>
                     </td>
                     <td>
+                        <p class="m-1">
                         <c:out value="${post.author}"/>
+                        </p>
                     </td>
                 </tr>
             </c:forEach>

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>New comment creation</title>
+    <title>Edit comment</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -23,22 +23,23 @@
     <jsp:include page="navbar.jsp"/>
     <div class="m-1">
         <p class="h6 m-1">
-                New comment for post:
+            Edit comment for post:
             <span class="fw-normal"><c:out value="${post.name}"/></span>
         </p>
     </div>
     <div class="m-1">
-        <form  action="<%=request.getContextPath()%>/comment/add" method="post">
+        <form  action="<%=request.getContextPath()%>/comment/edit" method="post">
             <div class="row m-1">
                 <div class="col-6">
                     <textarea class="form-control m-1" name="content"
                               style="height: 150px" placeholder="New comment"></textarea>
                 </div>
                 <input type="hidden" name="postId" value="<c:out value='${post.id}'/>" />
+                <input type="hidden" name="commentId" value="<c:out value='${commentId}'/>" />
             </div>
             <div class="row m-1">
                 <div class="col-2">
-                    <input class="btn btn-primary m-1" type="submit" value="Save" />
+                    <input type="submit" value="Save" />
                 </div>
             </div>
         </form>

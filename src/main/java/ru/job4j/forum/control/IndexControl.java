@@ -3,7 +3,7 @@ package ru.job4j.forum.control;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.job4j.forum.model.Post;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.forum.service.PostService;
 
 @Controller
@@ -15,11 +15,20 @@ public class IndexControl {
     }
 
     @GetMapping({"/", "/index"})
-    public String index(Model model) {
-        model.addAttribute("posts", posts.getAll());
-        for (Post post : posts.getAll()) {
-            System.out.println(post);
+    public String index(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "success", required = false) String success,
+                        Model model) {
+        String errorMessage = null;
+        String successMessage = null;
+        if (error != null) {
+            errorMessage = "Post deletion failure";
         }
+        if (success != null) {
+            successMessage = "Post deleted successfully";
+        }
+        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("successMessage", successMessage);
+        model.addAttribute("posts", posts.getAll());
         return "index";
     }
 }

@@ -67,6 +67,12 @@ public class Post {
         comments.add(comment);
     }
 
+    public void removeComment(int id) {
+        comments.stream()
+                .filter(c -> c.getId() == id).findFirst()
+                .ifPresent(comments::remove);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

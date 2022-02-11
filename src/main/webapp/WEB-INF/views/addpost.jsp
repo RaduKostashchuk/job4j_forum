@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Создание новой темы</title>
+    <title>New post creation</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -21,17 +21,17 @@
 <div class="container">
     <jsp:include page="navbar.jsp"/>
     <div class="m-1">
-        <p class="h6 m-1">Создание новой темы</p>
-        <form  action="<%=request.getContextPath()%>/addpost" method="post">
+        <p class="h6 m-1">New post creation</p>
+        <form  action="<%=request.getContextPath()%>/post/add" method="post">
             <div class="row m-1">
                 <div class="col-4">
-                    <label for="nameInput">Название</label>
+                    <label for="nameInput">Name</label>
                     <input type='text' id="nameInput" name="name"/>
                 </div>
             </div>
             <div class="row m-1">
                 <div class="col-2">
-                    <input name="submit" type="submit" value="Сохранить" />
+                    <input class="btn btn-primary m-1" name="submit" type="submit" value="Save" />
                 </div>
             </div>
         </form>
