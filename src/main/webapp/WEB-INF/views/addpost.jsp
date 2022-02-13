@@ -30,8 +30,14 @@
                 </div>
             </div>
             <div class="row m-1">
+                <div class="col-6">
+                    <textarea class="form-control m-1" name="content"
+                              style="height: 150px" placeholder="New comment"></textarea>
+                </div>
+            </div>
+            <div class="row m-1">
                 <div class="col-2">
-                    <input class="btn btn-primary m-1" name="submit" type="submit" value="Save" />
+                    <input class="btn btn-primary m-1" type="submit" value="Save" />
                 </div>
             </div>
         </form>

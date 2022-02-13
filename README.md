@@ -2,7 +2,7 @@
 
 It is a simple forum application.
 
-There is read only guest access fro anonymous users.
+Anonymous user can view all posts and comments.
 
 Registered user can create posts, edit/delete his own posts, leave new comments
 

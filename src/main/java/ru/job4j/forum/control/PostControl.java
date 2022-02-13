@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
 import static ru.job4j.forum.Util.checkUser;
@@ -76,9 +77,14 @@ public class PostControl {
     }
 
     @PostMapping("/post/add")
-    public String add(@RequestParam(value = "name") String name) {
+    public String add(@RequestParam(value = "name") String name,
+                      @RequestParam(value = "content", required = false) String content) {
         String author = SecurityContextHolder.getContext().getAuthentication().getName();
-        posts.add(Post.of(name, author));
+        Post post = Post.of(name, author);
+        if (content != null) {
+            post.addComment(Comment.of(content, author));
+        }
+        posts.add(post);
         return "redirect:/index";
     }
 }
