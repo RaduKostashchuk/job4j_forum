@@ -1,5 +1,7 @@
 package ru.job4j.forum.model;
 
+import org.hibernate.annotations.GeneratorType;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -7,7 +9,7 @@ import java.util.Objects;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
@@ -21,7 +23,7 @@ public class User {
         User user = new User();
         user.name = name;
         user.password = password;
-        user.enabled = true;
+        user.enabled = enabled;
         user.authority = authority;
         return user;
     }
@@ -48,6 +50,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Authority getAuthority() {

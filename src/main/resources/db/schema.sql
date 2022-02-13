@@ -5,9 +5,15 @@ create table if not exists post (
   created timestamp without time zone not null default now()
 );
 
-create table if not exists comment (
+create table if not exists authority (
   id serial primary key,
-  content varchar(2000),
-  author varchar(50),
-  created timestamp without time zone not null default now()
+  name varchar(50)
+);
+
+create table if not exists users (
+  id serial primary key,
+  name varchar(50) not null,
+  password varchar(100) not null,
+  enabled boolean not null default true,
+  authority_id int not null references authority(id)
 );

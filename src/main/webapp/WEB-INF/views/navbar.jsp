@@ -27,7 +27,8 @@
                 </c:if>
                 <c:if test="${user != null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/logout">Logout</a>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/logout">
+                        <c:out value="${user.getName()}"/> | Logout</a>
                 </li>
                 </c:if>
             </ul>
