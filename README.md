@@ -1,6 +1,6 @@
 # job4j_forum
-
-It is a simple forum application.
+## About
+It is a simple forum application based on Spring Boot.
 
 Anonymous user can view all posts and comments.
 
@@ -10,6 +10,7 @@ and edit/delete his own comments left earlier.
 
 Admin user can create posts, edit/delete all posts, edit his own comments and delete all comments. 
 
+## Overview
 Main page.
 
 ![ScreenShot](images/index.png)
@@ -45,3 +46,18 @@ Login page.
 Registrtion page.
 
 ![ScreenShot](images/reg.png)
+
+## Configuration and building
+
+Application configuration resides in /src/main/resources/application.properties file.
+
+You can build the application with command: mvn package.
+
+Before launching the application you must configure your database server according to 
+
+application.properties.
+
+## Contacts
+
+Email: kostasc@mail.ru
+Telegram: @rkostashchuk
